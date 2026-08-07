@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
@@ -24,55 +24,43 @@ export default function Navbar() {
 
   return (
     <>
-      {/* ── TOP LEFT CORNER LEAF (topLeave.png) — glued to viewport edge (top: -2px, left: -40px) ── */}
-      <img
-        src="/topLeave.webp"
-        alt=""
-        aria-hidden="true"
-        onError={handleImgError}
-        className="fixed top-[-2px] left-[-40px] hidden md:block w-[220px] lg:w-[270px] xl:w-[300px] h-auto object-contain origin-top-left pointer-events-none select-none overflow-visible"
-        style={{ zIndex: 5 }}
-      />
-
-      {/* ── TOP RIGHT CORNER LEAF (rightLeave.png) — glued to viewport edge (top: -2px, right: -40px) ── */}
-      <img
-        src="/rightLeave.webp"
-        alt=""
-        aria-hidden="true"
-        onError={handleImgError}
-        className="fixed top-[-2px] right-[-40px] hidden md:block w-[220px] lg:w-[270px] xl:w-[300px] h-auto object-contain origin-top-right pointer-events-none select-none overflow-visible"
-        style={{ zIndex: 5 }}
-      />
-
-      {/* ── NAVBAR CONTAINER (Height 72px, z-index 20, transparent) ── */}
+      {/* ── NAVBAR CONTAINER (Height 72px, z-index 20, transparent — hero bg shows through) ── */}
       <motion.nav
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1.0] }}
-        className="fixed top-0 left-0 right-0 bg-transparent"
-        style={{ zIndex: 20 }}
+        className="sticky top-0 w-full overflow-visible"
+        style={{
+          zIndex: 20,
+          background: 'transparent',
+          borderBottom: '1px solid rgba(255,255,255,0.03)',
+        }}
       >
         <div
-          className="relative w-full max-w-[1320px] mx-auto px-5 md:px-[28px] lg:px-[40px] flex items-center justify-between"
+          className="relative w-full max-w-[1320px] mx-auto px-4 sm:px-5 md:px-[28px] lg:px-[40px] flex items-center justify-between gap-3"
           style={{ height: '72px' }}
         >
           {/* Logo aligned left */}
           <a
             href="#home"
             className="flex-shrink-0 flex items-center group relative z-50"
+            onClick={(e) => {
+              e.preventDefault()
+              scrollToSection('home')
+            }}
           >
             <img
               src="/logo.webp"
               alt="Hacker House Goa"
               onError={handleImgError}
-              className="w-auto h-[60px] md:h-[68px] lg:h-[72px] object-contain select-none transition-transform duration-300 group-hover:scale-[1.03]"
+              className="w-auto h-[56px] sm:h-[60px] md:h-[68px] lg:h-[72px] object-contain select-none transition-transform duration-300 group-hover:scale-[1.03]"
             />
           </a>
 
           {/* Navigation perfectly centered */}
           <nav
             aria-label="Primary"
-            className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-[36px] lg:gap-[40px]"
+            className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-4 lg:gap-[40px]"
           >
             {navLinks.map((link, i) => (
               <motion.a
@@ -85,23 +73,23 @@ export default function Navbar() {
                 initial={{ opacity: 0, y: -8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.08 + i * 0.05, duration: 0.4 }}
-                className={`relative text-[15px] font-semibold tracking-[0.02em] transition-colors duration-200 ${
-                  link.active ? 'text-white' : 'text-white/60 hover:text-white'
+                className={`relative whitespace-nowrap text-[13px] lg:text-[15px] font-semibold tracking-normal transition-colors duration-200 ${
+                  link.active ? 'text-[#FFD229]' : 'text-white/[.88] hover:text-white'
                 }`}
               >
                 {link.label}
 
                 {/* Active Underline for Home */}
                 {link.active ? (
-                  <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-[28px] h-[3px] bg-[#FFE600] rounded-full" />
+                  <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-[28px] h-[3px] bg-[#FFD229] rounded-full" />
                 ) : (
-                  <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-[3px] bg-[#FF007F] rounded-full group-hover:w-[20px] transition-all duration-300" />
+                  <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-[3px] bg-white rounded-full group-hover:w-[20px] transition-all duration-300" />
                 )}
               </motion.a>
             ))}
           </nav>
 
-          {/* CTA Button aligned right */}
+          {/* CTA Button aligned right (Desktop) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -110,65 +98,74 @@ export default function Navbar() {
           >
             <Button
               variant="pink"
-              className="h-[44px] px-[24px] rounded-[12px] text-[14px] font-semibold tracking-wide shadow-[0_8px_20px_rgba(255,0,127,0.35)]"
+              className="h-[48px] px-0 py-0 rounded-[12px] text-[14px] font-semibold tracking-wide shadow-[0_8px_25px_rgba(255,0,130,0.22)] hover:shadow-[0_8px_25px_rgba(255,0,130,0.22)]"
+              style={{ paddingLeft: '28px', paddingRight: '28px' }}
               onClick={() => scrollToSection('generate')}
             >
               Create Your ID
             </Button>
           </motion.div>
 
+          {/* CTA Button (Mobile) */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.35, duration: 0.45 }}
+            className="md:hidden ml-auto flex items-center flex-shrink-0"
+          >
+            <Button
+              variant="pink"
+              className="min-h-[48px] h-[48px] px-4 py-0 rounded-[12px] text-[12px] font-semibold tracking-wide shadow-[0_8px_25px_rgba(255,0,130,0.22)] hover:shadow-[0_8px_25px_rgba(255,0,130,0.22)] whitespace-nowrap"
+              onClick={() => scrollToSection('generate')}
+            >
+              Create ID
+            </Button>
+          </motion.div>
+
           {/* Mobile menu toggle */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden relative z-50 text-white/70 hover:text-white transition-colors p-2"
-            aria-label="Toggle menu"
+            className="md:hidden relative z-50 text-white/70 hover:text-white transition-colors p-3 min-h-[48px] min-w-[48px] inline-flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F4C430] rounded-[12px]"
+            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-menu"
           >
             {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
 
         {/* Mobile drawer */}
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -16 }}
-            className="md:hidden fixed inset-0 top-0 bg-[#0B4D2B]/96 backdrop-blur-2xl z-40 pt-24 px-8"
-          >
-            <div className="flex flex-col gap-2">
-              {navLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    setMobileOpen(false)
-                    scrollToSection(link.targetId)
-                  }}
-                  className={`text-lg py-3 border-b border-white/[0.07] transition-colors font-medium ${
-                    link.active ? 'text-[#FFE600]' : 'text-white/70 hover:text-white'
-                  }`}
-                >
-                  {link.label}
-                </a>
-              ))}
-              <div className="mt-6">
-                <Button
-                  variant="pink"
-                  size="md"
-                  fullWidth
-                  className="h-[44px] rounded-[12px]"
-                  onClick={() => {
-                    setMobileOpen(false)
-                    scrollToSection('generate')
-                  }}
-                >
-                  Create Your ID
-                </Button>
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.div
+              id="mobile-menu"
+              initial={{ opacity: 0, height: 0, y: -8 }}
+              animate={{ opacity: 1, height: 'auto', y: 0 }}
+              exit={{ opacity: 0, height: 0, y: -8 }}
+              transition={{ duration: 0.24, ease: [0.25, 0.1, 0.25, 1.0] }}
+              className="md:hidden absolute left-0 right-0 top-full bg-[#0B4D2B]/96 backdrop-blur-2xl z-40 overflow-hidden"
+            >
+              <div className="flex flex-col gap-1 px-5 pb-5 pt-2">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      setMobileOpen(false)
+                      scrollToSection(link.targetId)
+                    }}
+                    className={`text-base py-3 min-h-[48px] border-b border-white/[0.07] transition-colors font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F4C430] rounded-[8px] ${
+                      link.active ? 'text-[#FFE600]' : 'text-white/70 hover:text-white'
+                    }`}
+                  >
+                    {link.label}
+                  </a>
+                ))}
               </div>
-            </div>
-          </motion.div>
-        )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.nav>
     </>
   )

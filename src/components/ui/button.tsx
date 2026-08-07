@@ -14,7 +14,7 @@ export const buttonVariants = cva(
         secondary:
           'bg-[#8A2BE2] text-white hover:bg-[#A044FF] shadow-[0_0_20px_rgba(138,43,226,0.4)] hover:shadow-[0_0_30px_rgba(138,43,226,0.6)] border border-[#8A2BE2]/30',
         pink:
-          'bg-[#FF007F] text-white hover:bg-[#FF3399] shadow-[0_0_20px_rgba(255,0,127,0.4)] hover:shadow-[0_0_30px_rgba(255,0,127,0.6)] border border-[#FF007F]/30',
+          'bg-[#FF0F87] text-white hover:bg-[#FF2A95] border-0',
         yellow:
           'bg-[#FFE600] text-[#040814] hover:bg-[#FFEC33] shadow-[0_0_20px_rgba(255,230,0,0.4)] hover:shadow-[0_0_30px_rgba(255,230,0,0.6)] font-semibold border border-[#FFE600]/30',
         outline:
