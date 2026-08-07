@@ -22,7 +22,7 @@ export default function Navbar() {
     <>
       {/* ── TOP LEFT CORNER LEAF (topLeave.png) — glued to viewport edge (top: -2px, left: -40px) ── */}
       <img
-        src="/topLeave.png"
+        src="/topLeave.webp"
         alt=""
         aria-hidden="true"
         onError={handleImgError}
@@ -32,7 +32,7 @@ export default function Navbar() {
 
       {/* ── TOP RIGHT CORNER LEAF (rightLeave.png) — glued to viewport edge (top: -2px, right: -40px) ── */}
       <img
-        src="/rightLeave.png"
+        src="/rightLeave.webp"
         alt=""
         aria-hidden="true"
         onError={handleImgError}
@@ -58,7 +58,7 @@ export default function Navbar() {
             className="flex-shrink-0 flex items-center group relative z-50"
           >
             <img
-              src="/logo.png"
+              src="/logo.webp"
               alt="Hacker House Goa"
               onError={handleImgError}
               className="w-auto h-[60px] md:h-[68px] lg:h-[72px] object-contain select-none transition-transform duration-300 group-hover:scale-[1.03]"

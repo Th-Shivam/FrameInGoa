@@ -11,7 +11,7 @@ export default function IDCardMockup() {
   return (
     <div className="w-full bg-transparent border-0 p-0 m-0">
       <motion.img
-        src="/idcard.png"
+        src="/idcard.webp"
         alt="Hacker House Goa 2026 — Official ID Card"
         onError={(e) => { e.currentTarget.style.display = 'none' }}
         animate={{ y: [0, -7, 0] }}
