@@ -16,7 +16,7 @@ export default function HeroSection({ children }: { children?: React.ReactNode }
   return (
     <section
       id="home"
-      className="relative w-full min-h-fit lg:h-[88vh] xl:h-[90vh] lg:max-h-[820px] overflow-visible flex flex-col"
+      className="relative w-full min-h-fit overflow-hidden lg:overflow-visible flex flex-col"
       style={{ backgroundColor: '#0B5A33', isolation: 'isolate' }}
     >
       {children}
@@ -40,7 +40,7 @@ export default function HeroSection({ children }: { children?: React.ReactNode }
         className="absolute top-[-2px] right-[-40px] hidden md:block w-[200px] lg:w-[250px] xl:w-[280px] h-auto object-contain origin-top-right pointer-events-none select-none overflow-visible"
         style={{ zIndex: 5 }}
       />
-      <div className="relative flex-1 w-full overflow-visible flex items-start pt-1 lg:pt-2">
+      <div className="relative flex-1 w-full overflow-hidden lg:overflow-visible flex items-start pt-1 lg:pt-2">
         {/* ── Unified Paper / Noise Overlay (z-index: 0) — sits behind everything, visible across navbar + hero ── */}
         <div
           aria-hidden="true"
@@ -108,7 +108,9 @@ export default function HeroSection({ children }: { children?: React.ReactNode }
     left-house-wrapper
     absolute
     left-[0px]
-    bottom-[200px]
+    bottom-[10px]
+    md:bottom-[50px]
+    lg:bottom-[20px]
     overflow-visible
     flex
     items-end
@@ -116,11 +118,14 @@ export default function HeroSection({ children }: { children?: React.ReactNode }
     pointer-events-none
     select-none
 
-    w-[260px]
-    h-[210px]
+    w-[46vw]
+    max-w-[220px]
+    h-auto
+    aspect-[26/21]
 
     sm:w-[380px]
     sm:h-[290px]
+    sm:max-w-none
 
     lg:w-[500px]
     lg:h-[390px]
@@ -156,8 +161,12 @@ export default function HeroSection({ children }: { children?: React.ReactNode }
           className="
     right-house-wrapper
     absolute
-    right-[-50px]
-    bottom-[230px]
+    right-[0px]
+    md:right-[-28px]
+    lg:right-[-50px]
+    bottom-[0px]
+    md:bottom-[5px]
+    lg:bottom-[20px]
     overflow-visible
     flex
     items-end
@@ -165,11 +174,14 @@ export default function HeroSection({ children }: { children?: React.ReactNode }
     pointer-events-none
     select-none
 
-    w-[260px]
-    h-[210px]
+    w-[46vw]
+    max-w-[220px]
+    h-auto
+    aspect-[26/21]
 
     sm:w-[380px]
     sm:h-[290px]
+    sm:max-w-none
 
     lg:w-[500px]
     lg:h-[390px]
@@ -216,11 +228,11 @@ export default function HeroSection({ children }: { children?: React.ReactNode }
 
         {/* ── ID Card & Strap Container (z-index: 10) ── */}
         <div
-          className="absolute pointer-events-auto hidden md:block"
+          className="absolute pointer-events-auto hidden lg:block"
           style={{
             top: '-10px',
-            right: '450px',
-            width: '420px',
+            right: 'min(34vw, 450px)',
+            width: 'min(32vw, 420px)',
             transform: 'rotate(-6deg)',
             zIndex: 10,
           }}
@@ -233,8 +245,8 @@ export default function HeroSection({ children }: { children?: React.ReactNode }
               top: '50%',
               left: '50%',
               transform: 'translate(-50%, -50%)',
-              width: '440px',
-              height: '440px',
+              width: 'min(36vw, 440px)',
+              height: 'min(36vw, 440px)',
               background:
                 'radial-gradient(circle, rgba(255,0,127,0.35) 0%, rgba(255,0,127,0.10) 48%, transparent 70%)',
               filter: 'blur(45px)',
@@ -246,32 +258,32 @@ export default function HeroSection({ children }: { children?: React.ReactNode }
 
         {/* ── Main Hero Content Grid (z-index: 10) ── */}
         <div
-          className="relative w-full max-w-[1320px] mx-auto px-6 lg:px-12 pb-0"
+          className="relative w-full max-w-[1320px] mx-auto px-5 sm:px-6 lg:px-12 pb-8 md:pb-8 lg:pb-8 pt-4 md:pt-8 lg:pt-0"
           style={{ zIndex: 10 }}
         >
           <motion.div
             initial="hidden"
             animate="visible"
             variants={staggerContainer}
-            className="flex flex-col justify-center max-w-[520px]"
+            className="flex flex-col justify-center items-center text-center md:items-start md:text-left max-w-[520px] mx-auto md:mx-0"
           >
             {/* Welcome Label + hhGoa.png Highlight Group */}
             <motion.div
               variants={staggerItem}
-              className="flex items-center gap-[10px] mb-4 flex-wrap"
+              className="flex items-center justify-center md:justify-start gap-[10px] mb-4 flex-wrap"
             >
               <span
                 className="inline-flex items-center gap-3 font-mono font-medium uppercase text-[#98E8A3]"
-                style={{ fontSize: '18px', letterSpacing: '0.4em' }}
+                style={{ fontSize: 'clamp(12px, 3.6vw, 18px)', letterSpacing: '0.26em' }}
               >
-                <span className="w-[56px] h-[2px] bg-[#98E8A3]/60 inline-block" />
+                <span className="hidden sm:inline-block w-[56px] h-[2px] bg-[#98E8A3]/60" />
                 Welcome to HH Goa 2026
               </span>
               <img
                 src="/hhGoa.png"
                 alt="HH Goa 2026 Badge"
                 onError={handleImgError}
-                className="h-[36px] w-auto object-contain select-none inline-block drop-shadow-sm"
+                className="h-[30px] sm:h-[36px] w-auto object-contain select-none inline-block drop-shadow-sm"
               />
             </motion.div>
 
@@ -310,8 +322,33 @@ export default function HeroSection({ children }: { children?: React.ReactNode }
             </motion.p>
 
             {/* Primary Call-To-Action: Upload Box Component */}
-            <motion.div variants={staggerItem} className="mb-2 ml-0 sm:ml-[40px] md:ml-[50px]">
+            <motion.div variants={staggerItem} className="mb-0 mx-auto md:mx-0 md:ml-[50px] w-full flex justify-center md:block">
               <UploadBox />
+            </motion.div>
+
+            <motion.div
+              variants={staggerItem}
+              className="relative z-10 flex justify-center lg:hidden w-full mt-1 md:mt-4 pointer-events-none"
+              style={{ transform: 'rotate(-6deg)' }}
+            >
+              <div className="relative">
+                <div
+                  aria-hidden="true"
+                  className="absolute pointer-events-none rounded-full"
+                  style={{
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: 'min(78vw, 360px)',
+                    height: 'min(78vw, 360px)',
+                    background:
+                      'radial-gradient(circle, rgba(255,0,127,0.35) 0%, rgba(255,0,127,0.10) 48%, transparent 70%)',
+                    filter: 'blur(45px)',
+                    zIndex: -1,
+                  }}
+                />
+                <IDCardMockup />
+              </div>
             </motion.div>
 
           </motion.div>

@@ -42,18 +42,9 @@ export default function FeaturesSection() {
     >
       {/* ── Outer (1400) / Inner content (1280) ── */}
       <div className="w-full mx-auto" style={{ maxWidth: '1400px' }}>
-        <div
-          className="mx-auto"
-          style={{
-            maxWidth: '1280px',
-            paddingLeft: '80px',
-            paddingRight: '80px',
-            paddingTop: '96px',
-            paddingBottom: '96px',
-          }}
-        >
+        <div className="mx-auto max-w-[1280px] px-5 sm:px-8 lg:px-20 py-16 md:py-20 lg:py-24">
           {/* ── Centered heading block ── */}
-          <div className="text-center mb-16">
+          <div className="text-center mb-10 md:mb-16">
             <span
               className="inline-block uppercase font-semibold tracking-[0.3em] text-[12px] mb-4"
               style={{ color: '#F6C431' }}
@@ -96,7 +87,7 @@ export default function FeaturesSection() {
           </div>
 
           {/* ── 5-card grid (equal heights) ── */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {features.map((feature) => {
               const Icon = feature.icon
               return (
@@ -104,7 +95,7 @@ export default function FeaturesSection() {
                   key={feature.title}
                   whileHover={{ y: -6 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 22 }}
-                  className="flex flex-col items-start"
+                  className="flex flex-col items-start min-w-0"
                   style={{
                     backgroundColor: '#F7F3E8',
                     borderRadius: '18px',

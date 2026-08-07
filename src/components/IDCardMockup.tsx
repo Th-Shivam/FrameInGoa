@@ -1,5 +1,4 @@
 import React from 'react'
-import { motion } from 'framer-motion'
 
 /**
  * IDCardMockup
@@ -12,12 +11,14 @@ export default function IDCardMockup() {
     <div
       className="
         relative
-        left-[-100px]
-        top-[-15px]
+        left-0
+        top-0
+        lg:left-[-100px]
+        lg:top-[-15px]
         
 
-        w-[120px]
-        sm:w-[240px]
+        w-[min(72vw,260px)]
+        sm:w-[260px]
         lg:w-[320px]
         xl:w-[380px]
       "

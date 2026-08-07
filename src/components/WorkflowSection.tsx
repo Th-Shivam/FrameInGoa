@@ -67,8 +67,8 @@ export default function WorkflowSection() {
         }}
       >
         {/* 4-step grid */}
-        <div className="w-full max-w-[1200px] mx-auto px-6 pt-5 pb-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 items-start justify-items-center">
+        <div className="w-full max-w-[1200px] mx-auto px-5 sm:px-6 pt-6 md:pt-5 pb-7 md:pb-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 lg:gap-12 items-start justify-items-center">
             {steps.map((step, idx) => {
               const Icon = step.icon
               return (
@@ -135,8 +135,8 @@ export default function WorkflowSection() {
           <svg
             viewBox="0 0 1440 56"
             preserveAspectRatio="none"
-            className="w-full block"
-            style={{ height: '48px', display: 'block' }}
+            className="w-full block h-[38px] md:h-[48px]"
+            style={{ display: 'block' }}
           >
             {/* cream (top) stays, green fills bottom */}
             <path
@@ -159,10 +159,10 @@ export default function WorkflowSection() {
         className="relative w-full"
         style={{ backgroundColor: '#0B5A33' }}
       >
-        <div className="w-full max-w-[1200px] mx-auto px-6 pt-[36px] pb-[20px] text-center flex flex-col items-center">
+        <div className="w-full max-w-[1200px] mx-auto px-5 sm:px-6 pt-[30px] md:pt-[36px] pb-[20px] text-center flex flex-col items-center">
           {/* Small label */}
           <p
-            className="uppercase font-bold text-[13px] tracking-[4px] mb-[12px]"
+            className="uppercase font-bold text-[12px] md:text-[13px] tracking-[3px] md:tracking-[4px] mb-[12px]"
             style={{ color: '#F4C430', fontFamily: 'var(--font-mono, monospace)' }}
           >
             WHY USE OUR ID GENERATOR?
@@ -170,7 +170,7 @@ export default function WorkflowSection() {
 
           {/* Main heading */}
           <h2
-            className="font-bold text-[34px] md:text-[46px] lg:text-[56px] leading-[1.05] tracking-[-0.5px] text-white relative inline-block"
+            className="font-bold text-[clamp(2rem,10vw,2.875rem)] lg:text-[56px] leading-[1.05] tracking-[-0.5px] text-white relative inline-block"
             style={{ fontFamily: 'var(--font-display)' }}
           >
             Make It Uniquely{' '}
@@ -191,4 +191,3 @@ export default function WorkflowSection() {
     </>
   )
 }
-

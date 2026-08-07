@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDropzone } from 'react-dropzone'
-import { UploadCloud, Image as ImageIcon, Trash2, RefreshCw, AlertCircle, X } from 'lucide-react'
+import { UploadCloud, Trash2, RefreshCw, AlertCircle, X } from 'lucide-react'
 import { useImageUpload, UploadedImageData } from '@/hooks/useImageUpload'
 
 interface UploadBoxProps {
@@ -39,7 +39,7 @@ export default function UploadBox({ onImageSelect }: UploadBoxProps) {
   }
 
   return (
-    <div className="relative w-full max-w-[300px] sm:w-[320px] md:w-[340px] lg:w-[360px]">
+    <div className="relative w-[min(100%,300px)] sm:w-[320px] md:w-[340px] lg:w-[360px] max-w-full">
       {/* ── Toast Notification ── */}
       {toastMessage && (
         <div
@@ -67,7 +67,7 @@ export default function UploadBox({ onImageSelect }: UploadBoxProps) {
           tabIndex={0}
           role="button"
           aria-label="Upload photo drag and drop area"
-          className={`relative w-full h-[155px] sm:h-[160px] lg:h-[170px] p-[18px] rounded-[28px] border-2 border-dashed cursor-pointer flex flex-col items-center justify-center text-center transition-all duration-250 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F4C430] ${
+          className={`relative w-full aspect-[36/22] min-h-[194px] sm:min-h-0 sm:h-[184px] lg:h-[194px] p-[22px] rounded-[28px] border-2 border-dashed cursor-pointer flex flex-col items-center justify-center text-center transition-all duration-250 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F4C430] ${
             isDragActive
               ? 'border-[#FFE600] bg-[#0B5A33]/40 shadow-[0_0_20px_rgba(244,196,48,0.25)] scale-[1.01]'
               : 'border-[#F4C430] bg-[#0B5A33]/20 hover:bg-[#0B5A33]/30'
@@ -96,7 +96,7 @@ export default function UploadBox({ onImageSelect }: UploadBoxProps) {
               e.stopPropagation()
               open()
             }}
-            className="bg-[#FF1F8F] text-white font-semibold text-xs py-[10px] px-[28px] rounded-[14px] hover:brightness-110 transition-all cursor-pointer shadow-md mb-2"
+            className="bg-[#FF1F8F] text-white font-semibold text-xs min-h-[48px] py-[10px] px-[28px] rounded-[14px] hover:brightness-110 transition-all cursor-pointer shadow-md mb-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F4C430]"
           >
             Browse Files
           </button>
@@ -108,7 +108,7 @@ export default function UploadBox({ onImageSelect }: UploadBoxProps) {
         </div>
       ) : (
         /* ── Uploaded File Preview State ── */
-        <div className="relative w-full h-[155px] sm:h-[160px] lg:h-[170px] p-[14px] rounded-[28px] border-2 border-solid border-[#F4C430]/60 bg-[#0B5A33]/40 flex flex-col items-center justify-between text-center transition-all duration-250">
+        <div className="relative w-full min-h-[204px] sm:min-h-0 sm:h-[184px] lg:h-[194px] p-[18px] rounded-[28px] border-2 border-solid border-[#F4C430]/60 bg-[#0B5A33]/40 flex flex-col items-center justify-between text-center transition-all duration-250">
           <div className="flex items-center gap-4 w-full text-left bg-black/20 p-3 rounded-2xl border border-white/10 mb-4">
             {/* Image Thumbnail */}
             <div className="relative w-14 h-14 rounded-xl overflow-hidden bg-black/40 border border-white/20 flex-shrink-0">
@@ -131,11 +131,11 @@ export default function UploadBox({ onImageSelect }: UploadBoxProps) {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex items-center justify-center gap-3 w-full">
+          <div className="flex flex-wrap items-center justify-center gap-3 w-full">
             <button
               type="button"
               onClick={handleChangePhoto}
-              className="flex items-center gap-1.5 bg-[#FF1F8F] text-white font-semibold text-xs py-2.5 px-4 rounded-[12px] hover:brightness-110 transition-all cursor-pointer"
+              className="flex items-center gap-1.5 bg-[#FF1F8F] text-white font-semibold text-xs min-h-[48px] py-2.5 px-4 rounded-[12px] hover:brightness-110 transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F4C430]"
             >
               <RefreshCw className="w-3.5 h-3.5" />
               Change Photo
@@ -143,7 +143,7 @@ export default function UploadBox({ onImageSelect }: UploadBoxProps) {
             <button
               type="button"
               onClick={handleRemove}
-              className="flex items-center gap-1.5 bg-red-600/80 hover:bg-red-600 text-white font-semibold text-xs py-2.5 px-3.5 rounded-[12px] transition-all cursor-pointer"
+              className="flex items-center gap-1.5 bg-red-600/80 hover:bg-red-600 text-white font-semibold text-xs min-h-[48px] py-2.5 px-3.5 rounded-[12px] transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F4C430]"
             >
               <Trash2 className="w-3.5 h-3.5" />
               Remove
