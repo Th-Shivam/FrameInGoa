@@ -1,12 +1,14 @@
 import Navbar from '@/components/Navbar'
 import HeroSection from '@/components/HeroSection'
+import WorkflowSection from '@/components/WorkflowSection'
 
 export default function App() {
   return (
     <>
-      <Navbar />
-      <HeroSection />
+      <HeroSection>
+        <Navbar />
+      </HeroSection>
+      <WorkflowSection />
     </>
   )
 }
-

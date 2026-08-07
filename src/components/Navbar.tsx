@@ -20,33 +20,17 @@ export default function Navbar() {
 
   return (
     <>
-      {/* ── TOP LEFT CORNER LEAF (topLeave.png) — glued to viewport edge (top: -2px, left: -40px) ── */}
-      <img
-        src="/topLeave.png"
-        alt=""
-        aria-hidden="true"
-        onError={handleImgError}
-        className="fixed top-[-2px] left-[-40px] hidden md:block w-[220px] lg:w-[270px] xl:w-[300px] h-auto object-contain origin-top-left pointer-events-none select-none overflow-visible"
-        style={{ zIndex: 5 }}
-      />
-
-      {/* ── TOP RIGHT CORNER LEAF (rightLeave.png) — glued to viewport edge (top: -2px, right: -40px) ── */}
-      <img
-        src="/rightLeave.png"
-        alt=""
-        aria-hidden="true"
-        onError={handleImgError}
-        className="fixed top-[-2px] right-[-40px] hidden md:block w-[220px] lg:w-[270px] xl:w-[300px] h-auto object-contain origin-top-right pointer-events-none select-none overflow-visible"
-        style={{ zIndex: 5 }}
-      />
-
-      {/* ── NAVBAR CONTAINER (Height 72px, z-index 20, transparent) ── */}
+      {/* ── NAVBAR CONTAINER (Height 72px, z-index 20, transparent — hero bg shows through) ── */}
       <motion.nav
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1.0] }}
-        className="fixed top-0 left-0 right-0 bg-transparent"
-        style={{ zIndex: 20 }}
+        className="relative w-full overflow-visible"
+        style={{
+          zIndex: 20,
+          background: 'transparent',
+          borderBottom: '1px solid rgba(255,255,255,0.03)',
+        }}
       >
         <div
           className="relative w-full max-w-[1320px] mx-auto px-5 md:px-[28px] lg:px-[40px] flex items-center justify-between"
@@ -77,17 +61,17 @@ export default function Navbar() {
                 initial={{ opacity: 0, y: -8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.08 + i * 0.05, duration: 0.4 }}
-                className={`relative text-[15px] font-semibold tracking-[0.02em] transition-colors duration-200 ${
-                  link.active ? 'text-white' : 'text-white/60 hover:text-white'
+                className={`relative text-[15px] font-semibold tracking-normal transition-colors duration-200 ${
+                  link.active ? 'text-[#FFD229]' : 'text-white/[.88] hover:text-white'
                 }`}
               >
                 {link.label}
 
                 {/* Active Underline for Home */}
                 {link.active ? (
-                  <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-[28px] h-[3px] bg-[#FFE600] rounded-full" />
+                  <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-[28px] h-[3px] bg-[#FFD229] rounded-full" />
                 ) : (
-                  <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-[3px] bg-[#FF007F] rounded-full group-hover:w-[20px] transition-all duration-300" />
+                  <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-[3px] bg-white rounded-full group-hover:w-[20px] transition-all duration-300" />
                 )}
               </motion.a>
             ))}
@@ -102,7 +86,8 @@ export default function Navbar() {
           >
             <Button
               variant="pink"
-              className="h-[44px] px-[24px] rounded-[12px] text-[14px] font-semibold tracking-wide shadow-[0_8px_20px_rgba(255,0,127,0.35)]"
+              className="h-[48px] px-0 py-0 rounded-[12px] text-[14px] font-semibold tracking-wide shadow-[0_8px_25px_rgba(255,0,130,0.22)] hover:shadow-[0_8px_25px_rgba(255,0,130,0.22)]"
+              style={{ paddingLeft: '28px', paddingRight: '28px' }}
             >
               Create Your ID
             </Button>
