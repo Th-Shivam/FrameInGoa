@@ -45,7 +45,21 @@ export default function Navbar() {
               src="/logo.png"
               alt="Hacker House Goa"
               onError={handleImgError}
-              className="w-auto h-[56px] sm:h-[60px] md:h-[68px] lg:h-[72px] object-contain select-none transition-transform duration-300 group-hover:scale-[1.03]"
+              className="
+w-auto
+h-[400px]
+sm:h-[100px]
+md:h-[250px]
+lg:h-[80px]
+object-contain
+
+relative
+top-2      /* Neeche shift */
+-top-2     /* Upar shift */
+left-2     /* Right ki taraf shift */
+-right-2   /* Left ki taraf shift */
+
+"
             />
           </a>
 
