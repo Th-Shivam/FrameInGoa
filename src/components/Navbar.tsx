@@ -4,15 +4,19 @@ import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 const navLinks = [
-  { label: 'Home', href: '#home', active: true },
-  { label: 'How It Works', href: '#how-it-works' },
-  { label: 'Gallery', href: '#gallery' },
-  { label: 'About HH Goa', href: '#about' },
-  { label: 'FAQ', href: '#faq' },
+  { label: 'Home', href: '#home', active: true, targetId: 'home' },
+  { label: 'How It Works', href: '#how-it-works', targetId: 'generate' },
+  { label: 'Gallery', href: '#gallery', targetId: 'generate' },
+  { label: 'About HH Goa', href: '#about', targetId: 'generate' },
+  { label: 'FAQ', href: '#faq', targetId: 'generate' },
 ]
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
+
+  const scrollToSection = (sectionId: string) => {
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' })
+  }
 
   const handleImgError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     e.currentTarget.style.display = 'none'
@@ -74,6 +78,10 @@ export default function Navbar() {
               <motion.a
                 key={link.label}
                 href={link.href}
+                onClick={(e) => {
+                  e.preventDefault()
+                  scrollToSection(link.targetId)
+                }}
                 initial={{ opacity: 0, y: -8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.08 + i * 0.05, duration: 0.4 }}
@@ -103,6 +111,7 @@ export default function Navbar() {
             <Button
               variant="pink"
               className="h-[44px] px-[24px] rounded-[12px] text-[14px] font-semibold tracking-wide shadow-[0_8px_20px_rgba(255,0,127,0.35)]"
+              onClick={() => scrollToSection('generate')}
             >
               Create Your ID
             </Button>
@@ -131,7 +140,11 @@ export default function Navbar() {
                 <a
                   key={link.label}
                   href={link.href}
-                  onClick={() => setMobileOpen(false)}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setMobileOpen(false)
+                    scrollToSection(link.targetId)
+                  }}
                   className={`text-lg py-3 border-b border-white/[0.07] transition-colors font-medium ${
                     link.active ? 'text-[#FFE600]' : 'text-white/70 hover:text-white'
                   }`}
@@ -140,7 +153,16 @@ export default function Navbar() {
                 </a>
               ))}
               <div className="mt-6">
-                <Button variant="pink" size="md" fullWidth className="h-[44px] rounded-[12px]">
+                <Button
+                  variant="pink"
+                  size="md"
+                  fullWidth
+                  className="h-[44px] rounded-[12px]"
+                  onClick={() => {
+                    setMobileOpen(false)
+                    scrollToSection('generate')
+                  }}
+                >
                   Create Your ID
                 </Button>
               </div>

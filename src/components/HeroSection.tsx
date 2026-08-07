@@ -10,6 +10,10 @@ import IDCardMockup from '@/components/IDCardMockup'
    ========================================================================== */
 
 export default function HeroSection() {
+  const scrollToSection = (sectionId: string) => {
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' })
+  }
+
   const handleImgError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     e.currentTarget.style.display = 'none'
   }
@@ -237,7 +241,7 @@ export default function HeroSection() {
               variant="pink"
               size="lg"
               rightIcon={<Upload className="w-4 h-4" />}
-              onClick={() => document.getElementById('generate')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => scrollToSection('generate')}
             >
               Upload Photo
             </Button>
@@ -246,6 +250,7 @@ export default function HeroSection() {
               size="lg"
               leftIcon={<Play className="w-4 h-4" />}
               className="border-[#7ec28b]/30 text-[#b3c7aa] hover:border-[#7ec28b]/60 hover:text-[#d6e5cf] hover:bg-[#7ec28b]/10"
+              onClick={() => scrollToSection('generate')}
             >
               View Demo
             </Button>
