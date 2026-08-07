@@ -4,15 +4,19 @@ import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 const navLinks = [
-  { label: 'Home', href: '#home', active: true },
-  { label: 'How It Works', href: '#how-it-works' },
-  { label: 'Gallery', href: '#gallery' },
-  { label: 'About HH Goa', href: '#about' },
-  { label: 'FAQ', href: '#faq' },
+  { label: 'Home', href: '#home', active: true, targetId: 'home' },
+  { label: 'How It Works', href: '#how-it-works', targetId: 'generate' },
+  { label: 'Gallery', href: '#gallery', targetId: 'generate' },
+  { label: 'About HH Goa', href: '#about', targetId: 'generate' },
+  { label: 'FAQ', href: '#faq', targetId: 'generate' },
 ]
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
+
+  const scrollToSection = (sectionId: string) => {
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' })
+  }
 
   const handleImgError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     e.currentTarget.style.display = 'none'
@@ -40,9 +44,13 @@ export default function Navbar() {
           <a
             href="#home"
             className="flex-shrink-0 flex items-center group relative z-50"
+            onClick={(e) => {
+              e.preventDefault()
+              scrollToSection('home')
+            }}
           >
             <img
-              src="/logo.png"
+              src="/logo.webp"
               alt="Hacker House Goa"
               onError={handleImgError}
               className="w-auto h-[56px] sm:h-[60px] md:h-[68px] lg:h-[72px] object-contain select-none transition-transform duration-300 group-hover:scale-[1.03]"
@@ -58,6 +66,10 @@ export default function Navbar() {
               <motion.a
                 key={link.label}
                 href={link.href}
+                onClick={(e) => {
+                  e.preventDefault()
+                  scrollToSection(link.targetId)
+                }}
                 initial={{ opacity: 0, y: -8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.08 + i * 0.05, duration: 0.4 }}
@@ -77,7 +89,7 @@ export default function Navbar() {
             ))}
           </nav>
 
-          {/* CTA Button aligned right */}
+          {/* CTA Button aligned right (Desktop) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -88,11 +100,13 @@ export default function Navbar() {
               variant="pink"
               className="h-[48px] px-0 py-0 rounded-[12px] text-[14px] font-semibold tracking-wide shadow-[0_8px_25px_rgba(255,0,130,0.22)] hover:shadow-[0_8px_25px_rgba(255,0,130,0.22)]"
               style={{ paddingLeft: '28px', paddingRight: '28px' }}
+              onClick={() => scrollToSection('generate')}
             >
               Create Your ID
             </Button>
           </motion.div>
 
+          {/* CTA Button (Mobile) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -102,6 +116,7 @@ export default function Navbar() {
             <Button
               variant="pink"
               className="min-h-[48px] h-[48px] px-4 py-0 rounded-[12px] text-[12px] font-semibold tracking-wide shadow-[0_8px_25px_rgba(255,0,130,0.22)] hover:shadow-[0_8px_25px_rgba(255,0,130,0.22)] whitespace-nowrap"
+              onClick={() => scrollToSection('generate')}
             >
               Create ID
             </Button>
@@ -135,7 +150,11 @@ export default function Navbar() {
                   <a
                     key={link.label}
                     href={link.href}
-                    onClick={() => setMobileOpen(false)}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      setMobileOpen(false)
+                      scrollToSection(link.targetId)
+                    }}
                     className={`text-base py-3 min-h-[48px] border-b border-white/[0.07] transition-colors font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F4C430] rounded-[8px] ${
                       link.active ? 'text-[#FFE600]' : 'text-white/70 hover:text-white'
                     }`}

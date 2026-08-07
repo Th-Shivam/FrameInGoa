@@ -3,12 +3,18 @@ import { motion } from 'framer-motion'
 import { staggerContainer, staggerItem } from '@/animations'
 import IDCardMockup from '@/components/IDCardMockup'
 import UploadBox from '@/components/upload/UploadBox'
+import { Upload, Play } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 /* ==========================================================================
    Hero Section — Ground Scenes, ID Card & Editorial Content
    ========================================================================== */
 
 export default function HeroSection({ children }: { children?: React.ReactNode }) {
+  const scrollToSection = (sectionId: string) => {
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' })
+  }
+
   const handleImgError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     e.currentTarget.style.display = 'none'
   }
@@ -21,7 +27,7 @@ export default function HeroSection({ children }: { children?: React.ReactNode }
     >
       {children}
 
-      {/* ── TOP LEFT CORNER LEAF (topLeave.png) — glued to viewport edge ── */}
+      {/* ── TOP LEFT CORNER LEAF (topLeave.png) ── */}
       <img
         src="/topLeave.png"
         alt=""
@@ -31,7 +37,7 @@ export default function HeroSection({ children }: { children?: React.ReactNode }
         style={{ zIndex: 5 }}
       />
 
-      {/* ── TOP RIGHT CORNER LEAF (rightLeave.png) — glued to viewport edge ── */}
+      {/* ── TOP RIGHT CORNER LEAF (rightLeave.png) ── */}
       <img
         src="/rightLeave.png"
         alt=""
@@ -40,8 +46,9 @@ export default function HeroSection({ children }: { children?: React.ReactNode }
         className="absolute top-[-2px] right-[-40px] hidden md:block w-[200px] lg:w-[250px] xl:w-[280px] h-auto object-contain origin-top-right pointer-events-none select-none overflow-visible"
         style={{ zIndex: 5 }}
       />
+      
       <div className="relative flex-1 w-full overflow-hidden lg:overflow-visible flex items-start pt-1 lg:pt-2">
-        {/* ── Unified Paper / Noise Overlay (z-index: 0) — sits behind everything, visible across navbar + hero ── */}
+        {/* ── Unified Paper / Noise Overlay (z-index: 0) ── */}
         <div
           aria-hidden="true"
           className="absolute inset-0 pointer-events-none"
@@ -83,9 +90,9 @@ export default function HeroSection({ children }: { children?: React.ReactNode }
           }}
         />
 
-        {/* ── Ground Line Divider (z-index: 5 so it slightly overlaps bottom of house wrappers) ── */}
+        {/* ── Ground Line Divider (using master's board.webp) ── */}
         <img
-          src="/line.png"
+          src="/board.webp"
           alt=""
           aria-hidden="true"
           onError={handleImgError}
@@ -98,113 +105,29 @@ export default function HeroSection({ children }: { children?: React.ReactNode }
           }}
         />
 
-        {/* ══════════════════════════════════════════════════
-          LEFT HOUSE WRAPPER
-          • absolute, left:0, bottom:0
-          • Desktop: 420x320 | Large Desktop: 460x350 | Tablet: 340x260 | Mobile: 220x170
-         ══════════════════════════════════════════════════ */}
+        {/* ── LEFT ILLUSTRATION GROUP (using master's house.webp) ── */}
         <div
-          className="
-    left-house-wrapper
-    absolute
-    left-[0px]
-    bottom-[10px]
-    md:bottom-[50px]
-    lg:bottom-[20px]
-    overflow-visible
-    flex
-    items-end
-    justify-start
-    pointer-events-none
-    select-none
-
-    w-[46vw]
-    max-w-[220px]
-    h-auto
-    aspect-[26/21]
-
-    sm:w-[380px]
-    sm:h-[290px]
-    sm:max-w-none
-
-    lg:w-[500px]
-    lg:h-[390px]
-
-    xl:w-[720px]
-    xl:h-[570px]
-  "
-          style={{ zIndex: 4 }}
+          className="absolute bottom-0 left-[15px] sm:left-[45px] lg:left-[80px] overflow-visible pointer-events-none select-none z-10 w-[180px] sm:w-[255px] lg:w-[340px]"
+          style={{ height: 'auto' }}
         >
           <img
-            src="/leftside.png"
+            src="/house.webp"
             alt=""
             aria-hidden="true"
-            onError={handleImgError}
-            className="
-      w-full
-      h-full
-      object-contain
-      object-left-bottom
-      scale-110
-      pointer-events-none
-      select-none
-    "
+            className="w-full h-auto"
           />
         </div>
 
-        {/* ══════════════════════════════════════════════════
-          RIGHT HOUSE WRAPPER
-          • absolute, right:0, bottom:0
-          • Desktop: 420x320 | Large Desktop: 460x350 | Tablet: 340x260 | Mobile: 220x170
-         ══════════════════════════════════════════════════ */}
+        {/* ── RIGHT ILLUSTRATION GROUP (using master's righthouse.webp) ── */}
         <div
-          className="
-    right-house-wrapper
-    absolute
-    right-[0px]
-    md:right-[-28px]
-    lg:right-[-50px]
-    bottom-[0px]
-    md:bottom-[5px]
-    lg:bottom-[20px]
-    overflow-visible
-    flex
-    items-end
-    justify-end
-    pointer-events-none
-    select-none
-
-    w-[46vw]
-    max-w-[220px]
-    h-auto
-    aspect-[26/21]
-
-    sm:w-[380px]
-    sm:h-[290px]
-    sm:max-w-none
-
-    lg:w-[500px]
-    lg:h-[390px]
-
-    xl:w-[620px]
-    xl:h-[510px]
-  "
-          style={{ zIndex: 4 }}
+          className="absolute bottom-0 right-[15px] sm:right-[45px] lg:right-[80px] overflow-visible pointer-events-none select-none z-10 w-[180px] sm:w-[255px] lg:w-[340px]"
+          style={{ height: 'auto' }}
         >
           <img
-            src="/rightside.png"
+            src="/righthouse.webp"
             alt=""
             aria-hidden="true"
-            onError={handleImgError}
-            className="
-      w-full
-      h-full
-      object-contain
-      object-right-bottom
-      scale-110
-      pointer-events-none
-      select-none
-    "
+            className="w-full h-auto"
           />
         </div>
 
@@ -226,7 +149,7 @@ export default function HeroSection({ children }: { children?: React.ReactNode }
           }}
         />
 
-        {/* ── ID Card & Strap Container (z-index: 10) ── */}
+        {/* ── ID Card & Strap Container (Desktop) ── */}
         <div
           className="absolute pointer-events-auto hidden lg:block"
           style={{
@@ -237,7 +160,6 @@ export default function HeroSection({ children }: { children?: React.ReactNode }
             zIndex: 10,
           }}
         >
-          {/* ── Pink Glow Behind Card (centered behind card) ── */}
           <div
             aria-hidden="true"
             className="absolute pointer-events-none rounded-full"
@@ -256,7 +178,7 @@ export default function HeroSection({ children }: { children?: React.ReactNode }
           <IDCardMockup />
         </div>
 
-        {/* ── Main Hero Content Grid (z-index: 10) ── */}
+        {/* ── Main Hero Content Grid ── */}
         <div
           className="relative w-full max-w-[1320px] mx-auto px-5 sm:px-6 lg:px-12 pb-8 md:pb-8 lg:pb-8 pt-4 md:pt-8 lg:pt-0"
           style={{ zIndex: 10 }}
@@ -315,17 +237,34 @@ export default function HeroSection({ children }: { children?: React.ReactNode }
             {/* Supporting Copy */}
             <motion.p
               variants={staggerItem}
-              className="text-[#b3c7aa] text-base md:text-lg leading-relaxed max-w-[480px] mb-6"
+              className="text-[#b3c7aa] text-base md:text-lg leading-relaxed max-w-[480px] mb-6 md:mb-10"
               style={{ fontFamily: 'var(--font-sans)' }}
             >
               Upload your photo and instantly generate your official Hacker House Goa ID Card — a premium keepsake for the most epic builder residency in India.
             </motion.p>
 
-            {/* Primary Call-To-Action: Upload Box Component */}
-            <motion.div variants={staggerItem} className="mb-0 mx-auto md:mx-0 md:ml-[50px] w-full flex justify-center md:block">
-              <UploadBox />
+            {/* CTA Buttons (wired with scrollToSection) */}
+            <motion.div variants={staggerItem} className="flex flex-wrap justify-center md:justify-start gap-4 mb-8">
+              <Button
+                variant="pink"
+                size="lg"
+                rightIcon={<Upload className="w-4 h-4" />}
+                onClick={() => scrollToSection('generate')}
+              >
+                Upload Photo
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                leftIcon={<Play className="w-4 h-4" />}
+                className="border-[#7ec28b]/30 text-[#b3c7aa] hover:border-[#7ec28b]/60 hover:text-[#d6e5cf] hover:bg-[#7ec28b]/10"
+                onClick={() => scrollToSection('generate')}
+              >
+                How it works
+              </Button>
             </motion.div>
 
+            {/* Mobile ID Card Preview (feature branch wala) */}
             <motion.div
               variants={staggerItem}
               className="relative z-10 flex justify-center lg:hidden w-full mt-1 md:mt-4 pointer-events-none"

@@ -1,4 +1,5 @@
 import React from 'react'
+import { motion } from 'framer-motion'
 
 /**
  * IDCardMockup
@@ -15,7 +16,6 @@ export default function IDCardMockup() {
         top-0
         lg:left-[-100px]
         lg:top-[-15px]
-        
 
         w-[min(72vw,260px)]
         sm:w-[260px]
@@ -23,8 +23,8 @@ export default function IDCardMockup() {
         xl:w-[380px]
       "
     >
-      <img
-        src="/idcard.png"
+      <motion.img
+        src="/idcard.webp"
         alt="Hacker House Goa 2026 — Official ID Card"
         onError={(e) => {
           e.currentTarget.style.display = "none";
