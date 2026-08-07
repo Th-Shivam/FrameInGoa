@@ -1,191 +1,228 @@
 import React from 'react'
-import { Upload, Crop, Palette, Download } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { Upload, Crop, Sparkles, Download } from 'lucide-react'
 
 /* ==========================================================================
-   Workflow / Features Section
-   STRUCTURE:
-   ┌─────────────────────────────────────────┐
-   │ CREAM (#F8F3E8)                         │
-   │  • 4-step icons grid (compact padding)  │
-   ├─────────────────────────────────────────┤
-   │ wave SVG cream → dark-green             │
-   ├─────────────────────────────────────────┤
-   │ DARK GREEN (#0B5A33)                    │
-   │  • WHY USE OUR ID GENERATOR? label     │
-   │  • Make It Uniquely Hacker. heading     │
-   └─────────────────────────────────────────┘
+   Workflow Section — Clean, Premium 4-Step Process
+   Smooth transition from hero → cream → dark green
    ========================================================================== */
 
 const steps = [
   {
     icon: Upload,
-    circleBg: '#FF007F',
-    iconColor: '#FFFFFF',
-    title: 'Upload Photo',
-    subtitle: 'Select your photo or selfie',
+    title: 'Upload',
+    subtitle: 'Drop your photo or selfie',
+    accent: '#FF007F',
   },
   {
     icon: Crop,
-    circleBg: '#FFE600',
-    iconColor: '#0B5A33',
-    title: 'Crop & Adjust',
-    subtitle: 'Frame & adjust alignment',
+    title: 'Crop',
+    subtitle: 'Frame your perfect shot',
+    accent: '#FFE600',
   },
   {
-    icon: Palette,
-    circleBg: '#FF007F',
-    iconColor: '#0B5A33',
+    icon: Sparkles,
     title: 'Customize',
-    subtitle: 'Add details & theme',
+    subtitle: 'Add your name & role',
+    accent: '#FF007F',
   },
   {
     icon: Download,
-    circleBg: '#FFE600',
-    iconColor: '#0B5A33',
     title: 'Download',
     subtitle: 'Get your official ID card',
+    accent: '#FFE600',
   },
 ]
 
-export default function WorkflowSection() {
-  const handleImgError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    e.currentTarget.style.display = 'none'
-  }
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.2,
+    },
+  },
+}
 
+const itemVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.25, 0.1, 0.25, 1.0],
+    },
+  },
+}
+
+export default function WorkflowSection() {
   return (
     <>
       {/* ══════════════════════════════════════════════════
-          CREAM SECTION — 4-step grid ONLY, compact height
+          CREAM SECTION — 4-step process
          ══════════════════════════════════════════════════ */}
       <section
         id="how-it-works"
         className="relative w-full"
-        style={{
-          backgroundColor: '#F8F3E8',
-          backgroundImage: 'radial-gradient(circle, rgba(11,90,51,0.035) 1px, transparent 1px)',
-          backgroundSize: '16px 16px',
-        }}
+        style={{ backgroundColor: '#F8F3E8' }}
       >
-        {/* 4-step grid */}
-        <div className="w-full max-w-[1200px] mx-auto px-5 sm:px-6 pt-6 md:pt-5 pb-7 md:pb-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 lg:gap-12 items-start justify-items-center">
+        {/* Section header */}
+        <div className="w-full max-w-[1200px] mx-auto px-5 sm:px-8 pt-14 md:pt-16 pb-2">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-10 md:mb-12"
+          >
+            <p
+              className="uppercase font-bold text-[11px] md:text-[12px] tracking-[3px] mb-3"
+              style={{ color: '#0B5A33', fontFamily: 'var(--font-mono, monospace)', opacity: 0.6 }}
+            >
+              How It Works
+            </p>
+            <h2
+              className="font-bold text-[clamp(1.5rem,4vw,2.25rem)] leading-tight tracking-[-0.02em] text-[#0B3D22]"
+              style={{ fontFamily: 'var(--font-display)' }}
+            >
+              Four Simple Steps
+            </h2>
+          </motion.div>
+        </div>
+
+        {/* Steps grid */}
+        <div className="w-full max-w-[960px] mx-auto px-5 sm:px-8 pb-14 md:pb-16">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-40px' }}
+            variants={containerVariants}
+            className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-10"
+          >
             {steps.map((step, idx) => {
               const Icon = step.icon
               return (
-                <div
+                <motion.div
                   key={step.title}
-                  className="relative flex flex-col items-center text-center w-full max-w-[240px]"
+                  variants={itemVariants}
+                  className="relative flex flex-col items-center text-center group"
                 >
-                  {/* 72×72 circle */}
+                  {/* Icon circle */}
                   <div
-                    className="w-[72px] h-[72px] rounded-full flex items-center justify-center mb-4 shadow-[0_6px_16px_rgba(0,0,0,0.12)] flex-shrink-0"
-                    style={{ backgroundColor: step.circleBg }}
+                    className="w-[56px] h-[56px] md:w-[64px] md:h-[64px] rounded-2xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-105"
+                    style={{
+                      backgroundColor: step.accent,
+                      boxShadow: `0 6px 20px ${step.accent}33`,
+                    }}
                   >
-                    <Icon className="w-8 h-8" style={{ color: step.iconColor }} strokeWidth={2.2} />
+                    <Icon
+                      className="w-6 h-6 md:w-7 md:h-7"
+                      style={{ color: step.accent === '#FFE600' ? '#0B5A33' : '#FFFFFF' }}
+                      strokeWidth={2}
+                    />
                   </div>
 
+                  {/* Step number */}
+                  <span
+                    className="text-[10px] font-mono font-bold uppercase tracking-[0.15em] mb-1.5"
+                    style={{ color: '#0B5A33', opacity: 0.35 }}
+                  >
+                    Step {idx + 1}
+                  </span>
+
+                  {/* Title */}
                   <h3
-                    className="font-bold text-[17px] leading-tight mb-1 text-[#0B5A33]"
+                    className="font-bold text-[15px] md:text-[16px] leading-tight mb-1 text-[#0B3D22]"
                     style={{ fontFamily: 'var(--font-display)', fontWeight: 700 }}
                   >
                     {step.title}
                   </h3>
 
+                  {/* Subtitle */}
                   <p
-                    className="font-medium text-[13px] leading-snug text-[#0B5A33]/80"
-                    style={{ fontFamily: 'var(--font-sans)', fontWeight: 500 }}
+                    className="font-medium text-[12px] md:text-[13px] leading-snug text-[#0B5A33]/60"
+                    style={{ fontFamily: 'var(--font-sans)', maxWidth: '160px' }}
                   >
                     {step.subtitle}
                   </p>
 
-                  {/* Dotted curved arrow between steps (desktop only) */}
+                  {/* Connector line (desktop only) */}
                   {idx < steps.length - 1 && (
-                    <svg
+                    <div
                       aria-hidden="true"
-                      className="hidden lg:block absolute -right-[52px] top-[21px] w-[90px] h-[30px] pointer-events-none select-none z-10"
-                      viewBox="0 0 90 30"
-                      fill="none"
-                    >
-                      <path
-                        d="M 6 22 C 30 5, 60 5, 80 16"
-                        stroke="#0B5A33"
-                        strokeWidth="2.2"
-                        strokeDasharray="4 4"
-                        strokeLinecap="round"
-                        fill="none"
-                      />
-                      <path
-                        d="M 73 11 L 82 17 L 76 22"
-                        stroke="#0B5A33"
-                        strokeWidth="2.2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        fill="none"
-                      />
-                    </svg>
+                      className="hidden lg:block absolute top-[28px] md:top-[32px] -right-[20px] md:-right-[24px] w-[40px] md:w-[48px] h-[2px]"
+                      style={{
+                        background: 'linear-gradient(to right, #0B5A33 0%, #0B5A33 60%, transparent 100%)',
+                        opacity: 0.15,
+                      }}
+                    />
                   )}
-                </div>
+                </motion.div>
               )
             })}
-          </div>
+          </motion.div>
         </div>
 
-        {/* Cream → Dark Green wave separator (bottom of cream section) */}
+        {/* Cream → Dark Green wave separator */}
         <div className="w-full overflow-hidden leading-none select-none pointer-events-none" style={{ lineHeight: 0 }}>
           <svg
-            viewBox="0 0 1440 56"
+            viewBox="0 0 1440 48"
             preserveAspectRatio="none"
-            className="w-full block h-[38px] md:h-[48px]"
+            className="w-full block h-[32px] md:h-[40px]"
             style={{ display: 'block' }}
           >
-            {/* cream (top) stays, green fills bottom */}
             <path
-              d="M0,0 L1440,0 L1440,18 Q1080,52 720,28 Q360,4 0,38 Z"
+              d="M0,0 L1440,0 L1440,16 Q1080,44 720,24 Q360,4 0,32 Z"
               fill="#F8F3E8"
             />
             <path
-              d="M0,38 Q360,4 720,28 Q1080,52 1440,18 L1440,56 L0,56 Z"
-              fill="#0B5A33"
+              d="M0,32 Q360,4 720,24 Q1080,44 1440,16 L1440,48 L0,48 Z"
+              fill="#0B4D2B"
             />
           </svg>
         </div>
       </section>
 
       {/* ══════════════════════════════════════════════════
-          DARK GREEN SECTION — heading block
+          DARK GREEN TRANSITION — heading into generator
          ══════════════════════════════════════════════════ */}
       <section
-        id="features"
         className="relative w-full"
-        style={{ backgroundColor: '#0B5A33' }}
+        style={{ backgroundColor: '#0B4D2B' }}
       >
-        <div className="w-full max-w-[1200px] mx-auto px-5 sm:px-6 pt-[30px] md:pt-[36px] pb-[20px] text-center flex flex-col items-center">
-          {/* Small label */}
-          <p
-            className="uppercase font-bold text-[12px] md:text-[13px] tracking-[3px] md:tracking-[4px] mb-[12px]"
-            style={{ color: '#F4C430', fontFamily: 'var(--font-mono, monospace)' }}
+        <div className="w-full max-w-[1200px] mx-auto px-5 sm:px-8 pt-10 md:pt-12 pb-6 md:pb-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.5 }}
           >
-            WHY USE OUR ID GENERATOR?
-          </p>
-
-          {/* Main heading */}
-          <h2
-            className="font-bold text-[clamp(2rem,10vw,2.875rem)] lg:text-[56px] leading-[1.05] tracking-[-0.5px] text-white relative inline-block"
-            style={{ fontFamily: 'var(--font-display)' }}
-          >
-            Make It Uniquely{' '}
-            <span className="relative inline-block">
-              Hacker.
-              {/* /line.png pink brush underline */}
-              <img
-                src="/line.png"
-                alt=""
-                aria-hidden="true"
-                onError={handleImgError}
-                className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-[120px] h-auto pointer-events-none select-none -rotate-6"
-              />
-            </span>
-          </h2>
+            <p
+              className="uppercase font-bold text-[11px] md:text-[12px] tracking-[3px] mb-3"
+              style={{ color: '#F4C430', fontFamily: 'var(--font-mono, monospace)' }}
+            >
+              Ready to Build?
+            </p>
+            <h2
+              className="font-bold text-[clamp(1.75rem,5vw,2.75rem)] leading-[1.1] tracking-[-0.02em] text-white"
+              style={{ fontFamily: 'var(--font-display)' }}
+            >
+              Make It Uniquely{' '}
+              <span className="relative inline-block">
+                <span
+                  style={{
+                    background: 'linear-gradient(135deg, #FF007F 0%, #FFE600 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                  }}
+                >
+                  Yours
+                </span>
+              </span>
+            </h2>
+          </motion.div>
         </div>
       </section>
     </>
