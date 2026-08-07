@@ -237,6 +237,7 @@ export default function HeroSection() {
               variant="pink"
               size="lg"
               rightIcon={<Upload className="w-4 h-4" />}
+              onClick={() => document.getElementById('generate')?.scrollIntoView({ behavior: 'smooth' })}
             >
               Upload Photo
             </Button>
