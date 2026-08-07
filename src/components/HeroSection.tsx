@@ -78,7 +78,7 @@ export default function HeroSection() {
       >
         {/* House (base of left group on ground) */}
         <img
-          src="/house.png"
+          src="/house.webp"
           alt=""
           aria-hidden="true"
           onError={handleImgError}
@@ -87,7 +87,7 @@ export default function HeroSection() {
         />
         {/* Board (stands in front of house) */}
         <img
-          src="/board.png"
+          src="/board.webp"
           alt=""
           aria-hidden="true"
           onError={handleImgError}
@@ -109,7 +109,7 @@ export default function HeroSection() {
       >
         {/* House (base of right group on ground) */}
         <img
-          src="/righthouse.png"
+          src="/righthouse.webp"
           alt=""
           aria-hidden="true"
           onError={handleImgError}
