@@ -2,12 +2,14 @@ import React from 'react'
 import { useDropzone } from 'react-dropzone'
 import { UploadCloud, Trash2, RefreshCw, AlertCircle, X } from 'lucide-react'
 import { useImageUpload, UploadedImageData } from '@/hooks/useImageUpload'
+import { navigateTo } from '@/lib/appRouter'
 
 interface UploadBoxProps {
   onImageSelect?: (data: UploadedImageData | null) => void
 }
 
 export default function UploadBox({ onImageSelect }: UploadBoxProps) {
+  const shouldNavigateToCreate = !onImageSelect
   const { imageData, toastMessage, handleFileDrop, removeImage, clearToast } = useImageUpload(
     (data) => {
       if (onImageSelect) onImageSelect(data)
@@ -23,9 +25,11 @@ export default function UploadBox({ onImageSelect }: UploadBoxProps) {
     },
     maxSize: 5 * 1024 * 1024,
     multiple: false,
-    noClick: false,
-    noKeyboard: false,
+    noClick: shouldNavigateToCreate,
+    noKeyboard: shouldNavigateToCreate,
   })
+
+  const navigateToCreate = () => navigateTo('/create-id')
 
   const handleRemove = (e: React.MouseEvent) => {
     e.stopPropagation()
@@ -64,6 +68,7 @@ export default function UploadBox({ onImageSelect }: UploadBoxProps) {
       {!imageData ? (
         <div
           {...getRootProps()}
+          onClick={shouldNavigateToCreate ? navigateToCreate : undefined}
           tabIndex={0}
           role="button"
           aria-label="Upload photo drag and drop area"
@@ -94,6 +99,10 @@ export default function UploadBox({ onImageSelect }: UploadBoxProps) {
             type="button"
             onClick={(e) => {
               e.stopPropagation()
+              if (shouldNavigateToCreate) {
+                navigateToCreate()
+                return
+              }
               open()
             }}
             className="bg-[#FF1F8F] text-white font-semibold text-xs min-h-[48px] py-[10px] px-[28px] rounded-[14px] hover:brightness-110 transition-all cursor-pointer shadow-md mb-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F4C430]"

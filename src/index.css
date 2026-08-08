@@ -268,6 +268,45 @@
     line-height: 1.6;
   }
 
+  /* Coral Range Slider */
+  .range-coral {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    border-radius: 999px;
+    background: linear-gradient(to right, #ff4f1f var(--fill, 0%), #e7dcbc var(--fill, 0%));
+    outline: none;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease;
+  }
+  .range-coral::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 18px;
+    width: 18px;
+    border-radius: 999px;
+    background: #ffffff;
+    border: 3px solid #ff4f1f;
+    box-shadow: 0 2px 8px rgba(255, 79, 31, 0.35);
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .range-coral::-webkit-slider-thumb:hover {
+    transform: scale(1.12);
+  }
+  .range-coral::-moz-range-thumb {
+    height: 18px;
+    width: 18px;
+    border-radius: 999px;
+    background: #ffffff;
+    border: 3px solid #ff4f1f;
+    box-shadow: 0 2px 8px rgba(255, 79, 31, 0.35);
+    cursor: pointer;
+  }
+  .range-coral:focus-visible {
+    box-shadow: 0 0 0 4px rgba(255, 79, 31, 0.15);
+  }
+
   /* Premium Cyber Border */
   .premium-border {
     position: relative;

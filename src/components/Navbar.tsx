@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { navigateTo } from '@/lib/appRouter'
 
 const navLinks = [
   { label: 'Home', href: '#home', active: true },
@@ -100,6 +101,9 @@ left-2     /* Right ki taraf shift */
           >
             <Button
               variant="pink"
+              type="button"
+              onClick={() => navigateTo('/create-id')}
+              aria-label="Create Your ID"
               className="h-[48px] px-0 py-0 rounded-[12px] text-[14px] font-semibold tracking-wide shadow-[0_8px_25px_rgba(255,0,130,0.22)] hover:shadow-[0_8px_25px_rgba(255,0,130,0.22)]"
               style={{ paddingLeft: '28px', paddingRight: '28px' }}
             >
@@ -115,6 +119,9 @@ left-2     /* Right ki taraf shift */
           >
             <Button
               variant="pink"
+              type="button"
+              onClick={() => navigateTo('/create-id')}
+              aria-label="Create ID"
               className="min-h-[48px] h-[48px] px-4 py-0 rounded-[12px] text-[12px] font-semibold tracking-wide shadow-[0_8px_25px_rgba(255,0,130,0.22)] hover:shadow-[0_8px_25px_rgba(255,0,130,0.22)] whitespace-nowrap"
             >
               Create ID
